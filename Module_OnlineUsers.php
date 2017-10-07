@@ -2,8 +2,8 @@
 namespace GDO\OnlineUsers;
 use GDO\Core\GDO_Module;
 use GDO\User\GDO_User;
-use GDO\Template\GDT_Bar;
-use GDO\Type\GDT_UInt;
+use GDO\UI\GDT_Bar;
+use GDO\DB\GDT_UInt;
 
 final class Module_OnlineUsers extends GDO_Module
 {

@@ -1,10 +1,10 @@
 <?php
 namespace GDO\OnlineUsers;
-use GDO\Template\GDT_Panel;
+use GDO\UI\GDT_Panel;
 use GDO\User\GDO_User;
 use GDO\DB\Cache;
 use GDO\User\GDO_Session;
-use GDO\Template\GDT_Template;
+use GDO\Core\GDT_Template;
 
 final class GDT_OnlineUsers extends GDT_Panel
 {

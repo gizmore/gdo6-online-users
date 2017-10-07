@@ -1,14 +1,14 @@
 <?php
 namespace GDO\OnlineUsers;
 use GDO\DB\Cache;
-use GDO\Template\GDT_Panel;
-use GDO\Template\GDT_Template;
+use GDO\UI\GDT_Panel;
+use GDO\Core\GDT_Template;
 use GDO\User\GDO_User;
 final class GDT_NewestUsers extends GDT_Panel
 {
     public static function recache()
     {
-        Cache::unset('gdt_online_users');
+        Cache::remove('gdt_online_users');
     }
     
     public static function getNewestUsers()
