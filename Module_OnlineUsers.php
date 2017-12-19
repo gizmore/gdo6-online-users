@@ -5,6 +5,7 @@ use GDO\Core\GDO_Module;
 use GDO\User\GDO_User;
 use GDO\UI\GDT_Bar;
 use GDO\DB\GDT_UInt;
+use GDO\DB\GDT_Checkbox;
 
 /**
  * User online statistics.
