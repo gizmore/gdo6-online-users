@@ -12,13 +12,27 @@ final class GDT_OnlineUsers extends GDT_Panel
     {
         if ($session = GDO_Session::instance())
         {
+        	# Get
             $cache = self::getOnlineUsers();
-            if (!(isset($cache[$session->getID()])))
-            {
-                $cache[$session->getID()] = [time(), $user];
-            }
-            Cache::set('gdt_online_users', $cache);
+            
+            # Update
+			$cache[$session->getID()] = [time(), $user];
+
+            # Cleanup
+            $cut = time() - Module_OnlineUsers::instance()->cfgOnlineTime();
+	        foreach ($cache as $sessid => $data)
+	        {
+	        	list($time, $user) = $data;
+	        	if ($time < $cut)
+	        	{
+	        		unset($cache[$sessid]);
+	        	}
+	        }
+        
+	        # Save
+	        Cache::set('gdt_online_users', $cache);
         }
+        
     }
     
     public static function getOnlineUsers()
