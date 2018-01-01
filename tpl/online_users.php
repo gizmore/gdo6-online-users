@@ -1,5 +1,4 @@
 <?php /** @var $field \GDO\OnlineUsers\GDT_OnlineUsers **/
-use GDO\UI\GDT_Tooltip;
 use GDO\UI\GDT_Link;
 use GDO\OnlineUsers\Module_OnlineUsers;
 $users = $field->getOnlineUsers();
