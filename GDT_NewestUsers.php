@@ -1,9 +1,18 @@
 <?php
 namespace GDO\OnlineUsers;
+
 use GDO\DB\Cache;
 use GDO\UI\GDT_Panel;
 use GDO\Core\GDT_Template;
 use GDO\User\GDO_User;
+
+/**
+ * This widget holds the newest users to display in a paragraph.
+ * 
+ * @author gizmore
+ * @since 6.04
+ * @version 6.10
+ */
 final class GDT_NewestUsers extends GDT_Panel
 {
     public static function recache()

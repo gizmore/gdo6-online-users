@@ -1,25 +1,49 @@
-<?php /** @var $field \GDO\OnlineUsers\GDT_OnlineUsers **/
-use GDO\UI\GDT_Link;
-use GDO\OnlineUsers\Module_OnlineUsers;
-$users = $field->getOnlineUsers();
-$ausers = [];
-$max = Module_OnlineUsers::instance()->cfgNumOnline();
-foreach ($users as $data)
-{
-	/** @var $user \GDO\User\GDO_User **/
-	list ($t, $user) = $data;
-	$uid = $user->getID();
-	
-	$ausers[$uid] = GDT_Link::anchor(href('Profile', 'View', "&user=$uid"), $user->displayNameLabel());
-}
-$online = count($ausers);
-$onlineUsers = implode(', ', array_slice($ausers, 0, $max));
+<?php
+/** @var $field \GDO\OnlineUsers\GDT_OnlineUsers **/
+/** @var $users \GDO\User\GDO_User[] **/
 
-if ($online > $max)
+use GDO\OnlineUsers\Module_OnlineUsers;
+use GDO\Profile\GDT_ProfileLink;
+
+$max = Module_OnlineUsers::instance()->cfgNumOnline();
+
+$data = $field->getOnlineUsers();
+$guests = $data['guests'];
+$users = $data['users'];
+$output = [];
+
+if ($guests > 0)
 {
-	echo "<div class=\"gdo-online-users\">" . t('num_online_more', [$online, $onlineUsers, ($max-$online)]) . "</div>\n" . "</div>";
+	$output[] = t('num_online_guests', [$guests]);
+}
+
+$more = false;
+foreach ($users as $user)
+{
+	if (module_enabled('Profile'))
+	{
+		$output[] = GDT_ProfileLink::make()->forUser($user)->withAvatar(false)->withNickname()->renderCell();
+	}
+	else
+	{
+		$output[] = $user->displayNameLabel();
+	}
+	
+	if (count($output) >= $max)
+	{
+		$more = true;
+		break;
+	}
+}
+
+$total = $guests + count($users);
+$onlineUsers = implode(', ', array_slice($output, 0, $max));
+
+if ($more)
+{
+	echo "<div class=\"gdo-online-users\">" . t('num_online_more', [$total, $onlineUsers]) . "</div>\n" . "</div>";
 }
 else 
 {
-	echo "<div class=\"gdo-online-users\">" . t('num_online', [$online, $onlineUsers]) . "</div>\n";
+	echo "<div class=\"gdo-online-users\">" . t('num_online', [$total, $onlineUsers]) . "</div>\n";
 }

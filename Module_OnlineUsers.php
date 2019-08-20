@@ -37,10 +37,10 @@ final class Module_OnlineUsers extends GDO_Module
     ### Init ###
     ############
     public function onLoadLanguage() { return $this->loadLanguage('lang/onlineusers'); }
-    public function onInit()
-    {
-        GDT_OnlineUsers::updateOnlineUser(GDO_User::current());
-    }
+//     public function onInit()
+//     {
+//         GDT_OnlineUsers::updateOnlineUser(GDO_User::current());
+//     }
     
     #############
     ### Hooks ###
