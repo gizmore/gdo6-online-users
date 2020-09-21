@@ -5,6 +5,7 @@ use GDO\UI\GDT_Panel;
 use GDO\User\GDO_User;
 use GDO\DB\Cache;
 use GDO\User\GDO_Session;
+use GDO\Core\Application;
 use GDO\Core\GDT_Template;
 use GDO\Date\Time;
 
@@ -22,7 +23,7 @@ final class GDT_OnlineUsers extends GDT_Panel
         if (false === ($cache = Cache::get('gdt_online_users')))
         {
         	# Online timeout
-            $cut = Time::getDate(time() - Module_OnlineUsers::instance()->cfgOnlineTime());
+            $cut = Time::getDate(Application::$TIME - Module_OnlineUsers::instance()->cfgOnlineTime());
             
             # Query users
             $users = GDO_Session::table()->
