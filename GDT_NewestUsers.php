@@ -27,6 +27,10 @@ final class GDT_NewestUsers extends GDT_Panel
             $module = Module_OnlineUsers::instance();
             $cache = GDO_User::table()->select()->order('user_register_time', false)->limit($module->cfgNumNewest())->exec()->fetchAllObjects();
         }
+        else
+        {
+            Cache::heat('gdt_online_users', $cache);
+        }
         return $cache;
     }
     
