@@ -1,6 +1,7 @@
 <?php
 return array(
-'num_online' => '%s users online: %s',
-'num_online_more' => '%s users online: %s, … and %s more.',
-'num_online_guests' => '%s guest(s)',
+'list_viewonline' => '%s online',
+'online_subtitle' => 'Registered %s (%s ago) - Level %s',
+'cfg_online_timeout' => 'Online timeout',
+'cfg_show_in_top_bar' => 'Show in navbar?',
 );

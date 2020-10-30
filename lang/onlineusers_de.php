@@ -1,6 +1,7 @@
 <?php
 return array(
-'num_online' => '%s Nutzer Online: %s',
-'num_online_more' => '%s Nutzer Online: %s, … und %s mehr.',
-'num_online_guests' => '%s Gäst(e)',
+'list_viewonline' => '%s online',
+'online_subtitle' => 'Registriert seit %s (vor %s) - Level %s',
+'cfg_online_timeout' => 'Online Zeitlimit',
+'cfg_show_in_top_bar' => 'In oberen Seitenberich anzeigen?',
 );
