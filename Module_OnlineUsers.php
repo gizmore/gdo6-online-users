@@ -23,7 +23,7 @@ final class Module_OnlineUsers extends GDO_Module
     public function getConfig()
     {
         return array(
-        	GDT_Duration::make('online_timeout')->initial('5m'),
+        	GDT_Duration::make('online_timeout')->initial('300'),
             GDT_Checkbox::make('show_in_top_bar')->initial('1'),
         );
     }
