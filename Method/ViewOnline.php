@@ -2,7 +2,7 @@
 namespace GDO\OnlineUsers\Method;
 
 use GDO\Table\MethodQueryList;
-use GDO\User\GDO_Session;
+use GDO\Session\GDO_Session;
 use GDO\User\GDO_User;
 use GDO\Core\Application;
 use GDO\OnlineUsers\Module_OnlineUsers;
