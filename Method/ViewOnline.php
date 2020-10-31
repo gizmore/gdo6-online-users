@@ -2,12 +2,15 @@
 namespace GDO\OnlineUsers\Method;
 
 use GDO\Table\MethodQueryList;
-use GDO\Session\GDO_Session;
 use GDO\User\GDO_User;
 use GDO\Core\Application;
 use GDO\OnlineUsers\Module_OnlineUsers;
 use GDO\Date\Time;
 
+/**
+ * View recently active users.
+ * @author gizmore
+ */
 final class ViewOnline extends MethodQueryList
 {
     public function gdoTable() { return GDO_User::table(); }
@@ -21,13 +24,9 @@ final class ViewOnline extends MethodQueryList
     {
         $cut = Application::$TIME - $this->onlineTimeout();
         $cutDate = Time::getDate($cut);
-        return GDO_Session::table()->
-        select('gdo_user.*, sess_time')->
-        joinObject('sess_user')->
-        where("sess_time >= '$cutDate'")->
-        where('user_type IN ("member", "guest")')->
-        uncached()->
-        fetchTable(GDO_User::table());
+        return GDO_User::table()->select()->
+        where("user_last_activity >= '$cutDate'")->
+        where('user_type IN ("member", "guest")');
     }
     
 }

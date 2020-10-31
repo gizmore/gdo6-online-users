@@ -8,7 +8,7 @@ use GDO\Date\GDT_Duration;
 
 /**
  * User online statistics.
- * - Display currently online in View
+ * Display currently online in View
  * @author gizmore
  * @version 6.10
  * @since 3.00
@@ -23,7 +23,7 @@ final class Module_OnlineUsers extends GDO_Module
     public function getConfig()
     {
         return array(
-        	GDT_Duration::make('online_timeout')->initial('60'),
+        	GDT_Duration::make('online_timeout')->initial('5m'),
             GDT_Checkbox::make('show_in_top_bar')->initial('1'),
         );
     }
