@@ -2,9 +2,9 @@
 namespace GDO\OnlineUsers;
 
 use GDO\Core\GDO_Module;
-use GDO\UI\GDT_Bar;
 use GDO\DB\GDT_Checkbox;
 use GDO\Date\GDT_Duration;
+use GDO\UI\GDT_Page;
 
 /**
  * User online statistics.
@@ -22,10 +22,10 @@ final class Module_OnlineUsers extends GDO_Module
 	##############
     public function getConfig()
     {
-        return array(
+        return [
         	GDT_Duration::make('online_timeout')->initial('300'),
             GDT_Checkbox::make('show_in_top_bar')->initial('1'),
-        );
+        ];
     }
     public function cfgOnlineTime() { return $this->getConfigValue('online_timeout'); }
     public function cfgShowInTopBar() { return $this->getConfigValue('show_in_top_bar'); }
@@ -38,11 +38,11 @@ final class Module_OnlineUsers extends GDO_Module
     #############
     ### Hooks ###
     #############
-    public function hookTopBar(GDT_Bar $bar)
+    public function onInitSidebar()
     {
         if ($this->cfgShowInTopBar())
         {
-            $bar->addField(GDT_OnlineUsers::make());
+            GDT_Page::$INSTANCE->topNav->addField(GDT_OnlineUsers::make());
         }
     }
     
