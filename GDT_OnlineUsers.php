@@ -22,7 +22,7 @@ final class GDT_OnlineUsers extends GDT_Link
         static $online;
         if ($online == null)
         {
-            $online = ViewOnline::make()->gdoQuery()->selectOnly('COUNT(*)')->first()->exec()->fetchValue();
+            $online = ViewOnline::make()->getQuery()->selectOnly('COUNT(*)')->first()->exec()->fetchValue();
         }
         return $online;
     }
