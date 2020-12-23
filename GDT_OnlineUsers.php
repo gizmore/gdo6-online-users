@@ -12,7 +12,7 @@ use GDO\OnlineUsers\Method\ViewOnline;
  */
 final class GDT_OnlineUsers extends GDT_Link
 {
-    public function __construct()
+    protected function __construct()
     {
         $this->href(href('OnlineUsers', 'ViewOnline'));
     }
