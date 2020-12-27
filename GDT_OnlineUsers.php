@@ -29,7 +29,7 @@ final class GDT_OnlineUsers extends GDT_Link
 
     public function renderCell()
     {
-        $this->label('list_viewonline', [$this->countOnline()]);
+        $this->label('list_onlineusers_viewonline', [$this->countOnline()]);
         return parent::renderCell();
     }
     
