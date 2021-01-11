@@ -3,6 +3,7 @@ namespace GDO\OnlineUsers;
 
 use GDO\UI\GDT_Link;
 use GDO\OnlineUsers\Method\ViewOnline;
+use GDO\Session\GDO_Session;
 
 /**
  * This GDT displays how many users are online at the moment.
@@ -23,6 +24,13 @@ final class GDT_OnlineUsers extends GDT_Link
         if ($online == null)
         {
             $online = ViewOnline::make()->getQuery()->selectOnly('COUNT(*)')->first()->exec()->fetchValue();
+            
+            if (GDO_Session::isDB())
+            {
+                $guests = GDO_Session::table()->countWhere('sess_user IS NULL');
+                $online += $guests;
+            }
+            
         }
         return $online;
     }
