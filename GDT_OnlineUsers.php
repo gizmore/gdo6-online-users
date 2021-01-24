@@ -23,11 +23,14 @@ final class GDT_OnlineUsers extends GDT_Link
         static $online;
         if ($online == null)
         {
-            $online = ViewOnline::make()->getQuery()->selectOnly('COUNT(*)')->first()->exec()->fetchValue();
+            $online = ViewOnline::make()->getQuery()->
+                selectOnly('COUNT(*)')->first()->
+                exec()->fetchValue();
             
             if (GDO_Session::isDB())
             {
-                $guests = GDO_Session::table()->countWhere('sess_user IS NULL');
+                $guests = GDO_Session::table()->
+                    countWhere('sess_user IS NULL');
                 $online += $guests;
             }
             
