@@ -9,24 +9,30 @@ use GDO\Date\Time;
 
 /**
  * View recently active users.
+ * 
+ * @version 6.10.3
+ * @since 6.7.0
  * @author gizmore
  */
 final class ViewOnline extends MethodQueryList
 {
     public function gdoTable() { return GDO_User::table(); }
     
-    private function onlineTimeout() { return Module_OnlineUsers::instance()->cfgOnlineTime(); }
-    
     public function getDefaultOrder() { return 'user_last_activity'; }
     public function getDefaultOrderDir() { return false; }
+    
+    private function onlineTimeout()
+    {
+        return Module_OnlineUsers::instance()->cfgOnlineTime();
+    }
     
     public function getQuery()
     {
         $cut = Application::$TIME - $this->onlineTimeout();
         $cutDate = Time::getDate($cut);
         return GDO_User::table()->select()->
-        where("user_last_activity >= '$cutDate'")->
-        where('user_type IN ("member", "guest")');
+            where("user_last_activity >= '$cutDate'")->
+            where('user_type IN ("member", "guest")');
     }
     
 }

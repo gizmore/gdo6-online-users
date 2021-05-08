@@ -10,13 +10,11 @@ use GDO\UI\GDT_Page;
  * User online statistics.
  * Display currently online in View
  * @author gizmore
- * @version 6.10
- * @since 3.00
+ * @version 6.10.3
+ * @since 3.0.1
  */
 final class Module_OnlineUsers extends GDO_Module
 {
-    public function getDependencies() { return ['Profile']; }
-    
 	##############
 	### Config ###
 	##############
