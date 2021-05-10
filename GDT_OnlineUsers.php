@@ -47,9 +47,9 @@ final class GDT_OnlineUsers extends GDT_Link
             
             if (GDO_Session::isDB())
             {
-                $guests = GDO_Session::table()->
-                    countWhere('sess_user IS NULL');
-                $online += $guests;
+                $cut = Module_OnlineUsers::instance()->onlineDateCut();
+                $online += GDO_Session::table()->
+                    countWhere("sess_user IS NULL AND sess_time > '$cut'");
             }
         }
         return $online;

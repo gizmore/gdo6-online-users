@@ -21,17 +21,11 @@ final class ViewOnline extends MethodQueryList
     public function getDefaultOrder() { return 'user_last_activity'; }
     public function getDefaultOrderDir() { return false; }
     
-    private function onlineTimeout()
-    {
-        return Module_OnlineUsers::instance()->cfgOnlineTime();
-    }
-    
     public function getQuery()
     {
-        $cut = Application::$TIME - $this->onlineTimeout();
-        $cutDate = Time::getDate($cut);
+        $cut = Module_OnlineUsers::instance()->onlineDateCut();
         return GDO_User::table()->select()->
-            where("user_last_activity >= '$cutDate'")->
+            where("user_last_activity >= '$cut'")->
             where('user_type IN ("member", "guest")');
     }
     

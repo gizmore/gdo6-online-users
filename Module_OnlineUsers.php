@@ -5,10 +5,13 @@ use GDO\Core\GDO_Module;
 use GDO\DB\GDT_Checkbox;
 use GDO\Date\GDT_Duration;
 use GDO\UI\GDT_Page;
+use GDO\Core\Application;
+use GDO\Date\Time;
 
 /**
  * User online statistics.
- * Display currently online in View
+ * Display currently online in View.
+ * 
  * @author gizmore
  * @version 6.10.3
  * @since 3.0.1
@@ -27,7 +30,10 @@ final class Module_OnlineUsers extends GDO_Module
     }
     public function cfgOnlineTime() { return $this->getConfigValue('online_timeout'); }
     public function cfgShowInTopBar() { return $this->getConfigValue('show_in_top_bar'); }
-
+    
+    public function onlineTimeoutCut() { return Application::$TIME - $this->cfgOnlineTime(); }
+    public function onlineDateCut() { return Time::getDate($this->onlineTimeoutCut()); }
+    
     ############
     ### Init ###
     ############
@@ -40,7 +46,8 @@ final class Module_OnlineUsers extends GDO_Module
     {
         if ($this->cfgShowInTopBar())
         {
-            GDT_Page::$INSTANCE->topNav->addField(GDT_OnlineUsers::make());
+            GDT_Page::$INSTANCE->topNav->addField(
+                GDT_OnlineUsers::make());
         }
     }
     
